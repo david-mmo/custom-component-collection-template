@@ -30,5 +30,12 @@
     "eslint-plugin-react": "^7.34.1",
     "prettier": "^3.0.3",
     "postcss-modules": "^6.0.0"
+  },
+  "retoolCustomComponentLibraryConfig": {
+    "name": "WebSocketsV2",
+    "label": "WebSocketsV2",
+    "description": "WebSockets Femsa Library",
+    "entryPoint": "src/index.tsx",
+    "outputPath": "dist"
   }
 }
