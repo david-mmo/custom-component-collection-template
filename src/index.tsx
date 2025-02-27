@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useImperativeHandle, useState } from 'react'
 import { type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
@@ -8,8 +8,8 @@ export const ChatComponent: FC = () => {
     name: 'Websocket URL'
   })
 
-  const [userName, _setUserName] = Retool.useStateString({
-    name: 'userName'
+  const [userId, _setUserId] = Retool.useStateString({
+    name: 'userId'
   })
   
   const [messages, setMessages] = useState<any[]>([]);
@@ -90,7 +90,7 @@ export const ChatComponent: FC = () => {
     if (socket.readyState === WebSocket.OPEN) {
       const goodbyeMessage = {
         type: "disconnect",
-        content: `${userName || 'Usuario'} se ha desconectado`,
+        content: `${userId || 'Usuario'} se ha desconectado`,
         timestamp: new Date().toISOString()
       };
       socket.send(JSON.stringify(goodbyeMessage));
@@ -131,13 +131,11 @@ export const ChatComponent: FC = () => {
         socket.close();
       }
     };
-  }, [websocketUrl, userName]); // Agregamos userName a las dependencias
+  }, [websocketUrl, useImperativeHandle]); // Agregamos userName a las dependencias
 
   return (
     <div>
-      <div>Hello World to {userName}!</div>
       <div>
-        <button onClick={handleClick}>A button</button>
         <button onClick={sendMessage}>Enviar Mensaje</button>
       </div>
       <div>
